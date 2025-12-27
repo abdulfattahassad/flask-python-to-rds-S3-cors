@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+</head>
+
+<body>
+
+    <h1>Welcome to Our Restaurant</h1>
+    <p>Explore our delicious menu and make a reservation today!</p>
+
+    <hr>
+
+    <!-- Customer Form -->
+    <form method="POST" action="http://44.200.50.82:5000/">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Message:</label><br>
+        <textarea name="msg" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    <!-- Menu Section -->
+    <h2>Our Menu</h2>
+    <button onclick="loadMenus()">Show Menu</button>
+
+    <div id="menu-images" style="margin-top:20px;"></div>
+
+    <script>
+        function loadMenus() {
+            fetch("http://44.200.50.82:5000/menus")
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById("menu-images");
+                    container.innerHTML = "";
+
+                    if (data.images.length === 0) {
+                        container.innerHTML = "<p>No menu images found.</p>";
+                        return;
+                    }
+
+                    data.images.forEach(url => {
+                        const img = document.createElement("img");
+                        img.src = url;
+                        img.style.width = "300px";
+                        img.style.margin = "10px";
+                        img.style.border = "1px solid #ccc";
+                        container.appendChild(img);
+                    });
+                })
+                .catch(() => {
+                    alert("Error loading menu images");
+                });
+        }
+    </script>
+
+</body>
+</html>
