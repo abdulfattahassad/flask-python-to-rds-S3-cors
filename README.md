@@ -5,4 +5,6 @@ Notes :
 -  the main issue was CORS ERROR shown in browsers
 -  CORS meaning :  Browser will allow Java script to reply to same origin which load index.html with java  other wise browser will block it
 -  to resolve  destination like pyhon flask should configured o allow CORS  --> 'hey broswer I am allow this jave to send the request to me "
-  
+-  index will be in s3 bucket
+
+
